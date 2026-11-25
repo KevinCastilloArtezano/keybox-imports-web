@@ -1,6 +1,6 @@
 /* KEYBOX IMPORTS — lógica de interfaz */
 
-const WHATSAPP_NUMBER = "51967777077"; // +51 967 777 077
+const WHATSAPP_NUMBER = "51993807070"; // +51 993 807 070
 
 function waLink(message) {
   const text = encodeURIComponent(message);

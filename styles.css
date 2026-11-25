@@ -325,8 +325,10 @@ p{ margin:0; }
   margin-top: auto;
   padding-top: 8px;
 }
+.price-group{ display:flex; align-items:baseline; gap: 8px; }
 .product-price{ font-weight: 700; font-size: 1.05rem; }
 .product-price.muted{ color: var(--ink-soft); font-size: 0.88rem; font-weight:600; }
+.product-price-original{ font-size: 0.85rem; color: var(--ink-soft); text-decoration: line-through; }
 .availability{
   font-size: 0.78rem;
   font-weight: 600;

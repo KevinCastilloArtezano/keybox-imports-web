@@ -5,72 +5,79 @@
  * Cada producto es un objeto dentro de la lista PRODUCTS.
  *
  * Campos:
- *  id          -> identificador único (texto, sin espacios)
- *  category    -> "macbooks" | "fundas" | "cargadores" | "otros"
- *  name        -> nombre del producto
- *  condition   -> "Nuevo" | "Usado"
- *  specs       -> especificaciones principales (texto corto)
- *  price       -> número en soles (ej: 1850) o null si aún no hay precio
- *  availability-> "disponible" | "pocas" | "consultar"
- *  icon        -> "macbook" | "case" | "charger" | "other" (ilustración)
- *  badge       -> texto corto opcional (ej: "Más vendido"), o "" si no aplica
+ *  id            -> identificador único (texto, sin espacios)
+ *  category      -> "macbooks" | "fundas" | "cargadores" | "otros"
+ *  name          -> nombre del producto
+ *  condition     -> "Nuevo" | "Usado"
+ *  specs         -> especificaciones principales (texto corto)
+ *  price         -> precio actual en soles (número) o null si aún no hay precio
+ *  originalPrice -> precio anterior en soles (número) si está en oferta, o null
+ *  availability  -> "disponible" | "pocas" | "consultar"
+ *  icon          -> "macbook" | "case" | "charger" | "other" (ilustración)
+ *  badge         -> texto corto opcional (ej: "Más vendido"), o "" si no aplica
+ *                   (si hay originalPrice, se muestra "Oferta" automáticamente)
  *
- * TODOS los textos marcados [EDITAR] son de ejemplo y deben ser
- * reemplazados por KEYBOX IMPORTS con información real antes de publicar.
+ * Los textos marcados [EDITAR] son de ejemplo y deben ser reemplazados
+ * por KEYBOX IMPORTS con información real antes de publicar.
  */
 
 const PRODUCTS = [
   {
-    id: "macbook-air-m1",
+    id: "macbook-pro-2020-13",
     category: "macbooks",
-    name: "MacBook Air M1",
+    name: "MacBook Pro 2020 13\"",
     condition: "Usado",
-    specs: "13\" · 8GB RAM · 256GB SSD — [EDITAR: confirmar specs reales]",
-    price: null,
-    availability: "consultar",
+    specs: "13\" · Core i7 · 16GB RAM · 512GB SSD",
+    price: 2199,
+    originalPrice: 2999,
+    availability: "disponible",
     icon: "macbook",
     badge: "",
   },
   {
-    id: "macbook-pro-m2",
+    id: "macbook-pro-2019-16",
     category: "macbooks",
-    name: "MacBook Pro M2",
+    name: "MacBook Pro 2019 16\"",
     condition: "Usado",
-    specs: "13\" · 8GB RAM · 512GB SSD — [EDITAR: confirmar specs reales]",
-    price: null,
-    availability: "pocas",
-    icon: "macbook",
-    badge: "Pocas unidades",
-  },
-  {
-    id: "macbook-pro-14-m3",
-    category: "macbooks",
-    name: "MacBook Pro 14\" M3",
-    condition: "Usado",
-    specs: "14\" · 16GB RAM · 512GB SSD — [EDITAR: confirmar specs reales]",
-    price: null,
-    availability: "consultar",
+    specs: "16\" · Core i7 · 16GB RAM · 512GB SSD",
+    price: 2099,
+    originalPrice: 2899,
+    availability: "disponible",
     icon: "macbook",
     badge: "",
   },
   {
-    id: "funda-macbook-air-13",
+    id: "macbook-air-2017",
+    category: "macbooks",
+    name: "MacBook Air 2017",
+    condition: "Usado",
+    specs: "13\" · Core i5 · 8GB RAM · 128GB SSD",
+    price: 749,
+    originalPrice: 999,
+    availability: "disponible",
+    icon: "macbook",
+    badge: "",
+  },
+  {
+    id: "funda-macbook-pro-13",
     category: "fundas",
-    name: "Funda protectora MacBook Air 13\"",
+    name: "Funda protectora MacBook Pro 13\"",
     condition: "Nuevo",
-    specs: "Compatible con MacBook Air 13\" · Varios colores — [EDITAR]",
-    price: null,
+    specs: "Compatible con MacBook Pro 13\"",
+    price: 40,
+    originalPrice: null,
     availability: "disponible",
     icon: "case",
     badge: "",
   },
   {
-    id: "funda-macbook-pro-14",
+    id: "funda-macbook-pro-15",
     category: "fundas",
-    name: "Funda protectora MacBook Pro 14\"",
+    name: "Funda protectora MacBook Pro 15\"",
     condition: "Nuevo",
-    specs: "Compatible con MacBook Pro 14\" · Varios colores — [EDITAR]",
-    price: null,
+    specs: "Compatible con MacBook Pro 15\"",
+    price: 50,
+    originalPrice: null,
     availability: "disponible",
     icon: "case",
     badge: "",
@@ -80,31 +87,34 @@ const PRODUCTS = [
     category: "cargadores",
     name: "Cargador USB-C 61W",
     condition: "Usado",
-    specs: "Compatible con MacBook Air / Pro — [EDITAR: confirmar modelo]",
-    price: null,
+    specs: "Compatible con MacBook Air / Pro",
+    price: 169,
+    originalPrice: null,
     availability: "disponible",
     icon: "charger",
     badge: "",
   },
   {
-    id: "cargador-usb-c-96w",
+    id: "cargador-usb-c-86w",
     category: "cargadores",
-    name: "Cargador USB-C 96W",
+    name: "Cargador USB-C 86W",
     condition: "Usado",
-    specs: "Compatible con MacBook Pro — [EDITAR: confirmar modelo]",
-    price: null,
-    availability: "consultar",
+    specs: "Compatible con MacBook Pro",
+    price: 189,
+    originalPrice: null,
+    availability: "disponible",
     icon: "charger",
     badge: "",
   },
   {
-    id: "otro-producto-ejemplo",
+    id: "teclado-apple",
     category: "otros",
-    name: "[EDITAR: nombre del producto]",
-    condition: "Nuevo",
-    specs: "[EDITAR: especificaciones principales]",
-    price: null,
-    availability: "consultar",
+    name: "Teclado Apple",
+    condition: "Usado", // [EDITAR: confirmar si es nuevo o usado]
+    specs: "[EDITAR: modelo — Magic Keyboard, con/sin teclado numérico, idioma]",
+    price: 199,
+    originalPrice: 399,
+    availability: "disponible",
     icon: "other",
     badge: "",
   },

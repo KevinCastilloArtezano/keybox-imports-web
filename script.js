@@ -22,21 +22,26 @@ function formatPrice(price) {
 function productCard(product) {
   const priceText = formatPrice(product.price);
   const waMessage = `Hola, vi "${product.name}" en la web de KEYBOX IMPORTS. ¿Podrían confirmarme si está disponible?`;
+  const originalPriceText = formatPrice(product.originalPrice);
+  const badgeText = product.badge || (originalPriceText ? "Oferta" : "");
 
   return `
     <article class="product-card" data-category="${product.category}">
       <div class="product-media">
         <span class="badge ${product.condition === "Nuevo" ? "badge-new" : "badge-used"}">${product.condition}</span>
-        ${product.badge ? `<span class="badge-tag">${product.badge}</span>` : ""}
+        ${badgeText ? `<span class="badge-tag">${badgeText}</span>` : ""}
         ${PRODUCT_ICONS[product.icon] || PRODUCT_ICONS.other}
       </div>
       <div class="product-body">
         <h3>${product.name}</h3>
         <p class="product-specs">${product.specs}</p>
         <div class="product-meta">
-          ${priceText
-            ? `<span class="product-price">${priceText}</span>`
-            : `<span class="product-price muted">Consultar precio</span>`}
+          <span class="price-group">
+            ${originalPriceText ? `<span class="product-price-original">${originalPriceText}</span>` : ""}
+            ${priceText
+              ? `<span class="product-price">${priceText}</span>`
+              : `<span class="product-price muted">Consultar precio</span>`}
+          </span>
           <span class="availability av-${product.availability}">${AVAILABILITY_LABELS[product.availability]}</span>
         </div>
         <a class="btn btn-whatsapp" href="${waLink(waMessage)}" target="_blank" rel="noopener">

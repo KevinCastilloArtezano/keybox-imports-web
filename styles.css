@@ -453,6 +453,7 @@ p{ margin:0; }
 }
 .trust-item h4{ font-size: 0.95rem; margin-bottom: 6px; }
 .trust-item p{ font-size: 0.86rem; color: var(--ink-soft); }
+.trust-item p + p{ margin-top: 8px; }
 
 /* ---------- about ---------- */
 .about-inner p{ color: var(--ink-soft); margin-bottom: 14px; max-width: 720px; }

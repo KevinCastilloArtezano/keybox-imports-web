@@ -62,63 +62,27 @@
         </div>
         <p class="hero-note">* Los MacBooks son equipos <strong>usados</strong> en buen estado. Las fundas son productos <strong>nuevos</strong>. Cada ficha indica claramente el estado del producto.</p>
       </div>
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual" id="heroVisual" aria-hidden="true">
         <div class="hero-glow"></div>
-        <svg viewBox="0 0 480 320" class="hero-mac">
-          <defs>
-            <linearGradient id="airBody" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#2a3348"/>
-              <stop offset="1" stop-color="#1c2434"/>
-            </linearGradient>
-            <linearGradient id="proBody" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#333c56"/>
-              <stop offset="1" stop-color="#1f2638"/>
-            </linearGradient>
-            <linearGradient id="proScreen" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#4b3fd6"/>
-              <stop offset="0.55" stop-color="#6c63ff"/>
-              <stop offset="1" stop-color="#2ec4b6"/>
-            </linearGradient>
-            <linearGradient id="airScreen" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#394468"/>
-              <stop offset="1" stop-color="#171d2c"/>
-            </linearGradient>
-            <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="8"/>
-            </filter>
-          </defs>
-
-          <ellipse cx="260" cy="300" rx="190" ry="16" fill="#000" opacity="0.35" filter="url(#softShadow)"/>
-
-          <!-- MacBook Air (atrás, perfil delgado) -->
-          <g opacity="0.92">
-            <rect x="18" y="26" width="226" height="140" rx="10" fill="url(#airBody)" stroke="#39425a" stroke-width="1"/>
-            <rect x="28" y="36" width="206" height="118" rx="3" fill="url(#airScreen)"/>
-            <rect x="40" y="48" width="100" height="8" rx="4" fill="#ffffff" fill-opacity="0.18"/>
-            <rect x="40" y="64" width="150" height="6" rx="3" fill="#ffffff" fill-opacity="0.1"/>
-            <path d="M4 170 L258 170 L246 182 L16 182 Z" fill="url(#airBody)"/>
-          </g>
-
-          <!-- MacBook Pro (adelante, con notch y pantalla tipo dashboard) -->
-          <g>
-            <rect x="196" y="70" width="256" height="166" rx="12" fill="url(#proBody)" stroke="#454f6c" stroke-width="1"/>
-            <rect x="208" y="82" width="232" height="142" rx="4" fill="url(#proScreen)"/>
-            <rect x="312" y="82" width="24" height="9" rx="4" fill="#1f2638"/>
-
-            <!-- mini UI: barras + línea, como un mini dashboard -->
-            <g opacity="0.9">
-              <rect x="222" y="178" width="36" height="30" rx="4" fill="#ffffff" fill-opacity="0.16"/>
-              <rect x="264" y="160" width="36" height="48" rx="4" fill="#ffffff" fill-opacity="0.22"/>
-              <rect x="306" y="190" width="36" height="18" rx="4" fill="#ffffff" fill-opacity="0.16"/>
-              <polyline points="224,140 252,122 280,132 308,104 336,112" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-              <circle cx="336" cy="112" r="4" fill="#ffffff"/>
-              <rect x="222" y="94" width="70" height="9" rx="4" fill="#ffffff" fill-opacity="0.35"/>
-            </g>
-
-            <path d="M178 238 L470 238 L452 254 L196 254 Z" fill="url(#proBody)"/>
-            <rect x="308" y="242" width="52" height="5" rx="2.5" fill="#121826" opacity="0.5"/>
-          </g>
-        </svg>
+        <div class="hero-device hero-device-air" id="heroDeviceAir">
+          <img
+            src="assets/hero-macbook-air.webp"
+            alt=""
+            class="hero-mac hero-mac-air"
+            width="1100"
+            height="706"
+          >
+        </div>
+        <div class="hero-device hero-device-pro" id="heroDevicePro">
+          <img
+            src="assets/hero-macbook-pro.webp"
+            alt=""
+            class="hero-mac hero-mac-pro"
+            width="1100"
+            height="687"
+            fetchpriority="high"
+          >
+        </div>
       </div>
     </div>
   </section>

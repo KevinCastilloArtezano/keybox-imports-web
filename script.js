@@ -93,10 +93,33 @@ function setupWhatsappLinks() {
   if (header) header.href = waLink("Hola, quisiera más información sobre los productos de KEYBOX IMPORTS.");
 }
 
+function setupHeroParallax() {
+  const visual = document.getElementById("heroVisual");
+  const air = document.getElementById("heroDeviceAir");
+  const pro = document.getElementById("heroDevicePro");
+  if (!visual || !air || !pro) return;
+  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (reduced || !canHover) return;
+
+  visual.addEventListener("pointermove", (e) => {
+    const r = visual.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    air.style.transform = `translate(${px * -14}px, ${py * -10}px)`;
+    pro.style.transform = `translate(${px * 18}px, ${py * 12}px)`;
+  });
+  visual.addEventListener("pointerleave", () => {
+    air.style.transform = "";
+    pro.style.transform = "";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
   setupFilters();
   setupMobileMenu();
   setupWhatsappLinks();
+  setupHeroParallax();
   document.getElementById("year").textContent = new Date().getFullYear();
 });

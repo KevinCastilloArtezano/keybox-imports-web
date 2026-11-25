@@ -109,9 +109,9 @@ const PRODUCTS = [
   {
     id: "teclado-apple",
     category: "otros",
-    name: "Teclado Apple",
+    name: "Apple Magic Keyboard",
     condition: "Usado", // [EDITAR: confirmar si es nuevo o usado]
-    specs: "[EDITAR: modelo — Magic Keyboard, con/sin teclado numérico, idioma]",
+    specs: "Modelo A1644",
     price: 199,
     originalPrice: 399,
     availability: "disponible",

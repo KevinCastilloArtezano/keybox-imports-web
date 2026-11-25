@@ -325,6 +325,8 @@ p{ margin:0; }
 }
 
 /* ---------- sr-only ---------- */
+.text-upper{ text-transform: uppercase; }
+
 .sr-only{
   position: absolute;
   width: 1px; height: 1px;

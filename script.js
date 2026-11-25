@@ -43,7 +43,7 @@ function renderProducts(filter = "all") {
   if (!carousel) {
     const mount = document.getElementById("product-carousel");
     carousel = new ProductWarpCarousel(mount, {
-      background: "#0b0d10",
+      background: "#121826",
       interval: 3.4,
       step: 2,
       onFront: updateCarouselInfo,

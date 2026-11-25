@@ -581,7 +581,7 @@
   class ProductWarpCarousel {
     constructor(container, opts) {
       this.container = container;
-      this.opts = Object.assign({ background: "#0b0d10", interval: 3.4, step: 2, autoplay: true, onFront: null }, opts);
+      this.opts = Object.assign({ background: "#121826", interval: 3.4, step: 2, autoplay: true, onFront: null }, opts);
       this.canvas = document.createElement("canvas");
       this.canvas.setAttribute("aria-hidden", "true");
       this.canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;";

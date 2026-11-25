@@ -438,6 +438,7 @@ p{ margin:0; }
 }
 .step h3{ margin-bottom: 8px; font-size: 1.05rem; }
 .step p{ color: var(--ink-soft); font-size: 0.92rem; }
+.step p + p{ margin-top: 10px; }
 
 .trust-details{
   display:grid;

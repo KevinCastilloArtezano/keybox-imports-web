@@ -153,21 +153,21 @@ function macbooksModalItem(product) {
   `;
 }
 
-function renderMacbooksModal() {
-  const body = document.getElementById("macbooksModalBody");
-  const items = PRODUCTS.filter((p) => p.category === "macbooks");
+function renderProductModal(modalId, bodyId, filterFn) {
+  const body = document.getElementById(bodyId);
+  const items = PRODUCTS.filter(filterFn);
   body.innerHTML = items.length
     ? items.map(macbooksModalItem).join("")
     : `<p class="modal-empty">Aún no hay equipos cargados en esta categoría.</p>`;
 }
 
-function setupMacbooksModal() {
-  const modal = document.getElementById("macbooksModal");
-  const closeBtn = document.getElementById("macbooksModalClose");
+function setupProductModal({ modalId, closeId, bodyId, triggerClass, filterFn }) {
+  const modal = document.getElementById(modalId);
+  const closeBtn = document.getElementById(closeId);
   if (!modal || !closeBtn) return;
 
   const open = () => {
-    renderMacbooksModal();
+    renderProductModal(modalId, bodyId, filterFn);
     modal.hidden = false;
     document.body.style.overflow = "hidden";
     closeBtn.focus();
@@ -177,7 +177,7 @@ function setupMacbooksModal() {
     document.body.style.overflow = "";
   };
 
-  document.querySelectorAll(".js-open-macbooks").forEach((link) => {
+  document.querySelectorAll(`.${triggerClass}`).forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const nav = document.getElementById("nav-mobile");
@@ -194,7 +194,7 @@ function setupMacbooksModal() {
   modal.addEventListener("click", (e) => {
     if (e.target === modal) close();
   });
-  document.getElementById("macbooksModalBody").addEventListener("click", (e) => {
+  document.getElementById(bodyId).addEventListener("click", (e) => {
     const photoEl = e.target.closest(".modal-item-photo[data-product-id]");
     if (!photoEl) return;
     const product = PRODUCTS.find((p) => p.id === photoEl.dataset.productId);
@@ -204,6 +204,26 @@ function setupMacbooksModal() {
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.hidden) close();
+  });
+}
+
+function setupMacbooksModal() {
+  setupProductModal({
+    modalId: "macbooksModal",
+    closeId: "macbooksModalClose",
+    bodyId: "macbooksModalBody",
+    triggerClass: "js-open-macbooks",
+    filterFn: (p) => p.category === "macbooks",
+  });
+}
+
+function setupOtrosModal() {
+  setupProductModal({
+    modalId: "otrosModal",
+    closeId: "otrosModalClose",
+    bodyId: "otrosModalBody",
+    triggerClass: "js-open-otros",
+    filterFn: (p) => p.category !== "macbooks",
   });
 }
 
@@ -272,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupWhatsappLinks();
   setupHeroParallax();
   setupMacbooksModal();
+  setupOtrosModal();
   setupPhotoLightbox();
   document.getElementById("year").textContent = new Date().getFullYear();
 });

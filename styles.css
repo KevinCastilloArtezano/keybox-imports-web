@@ -66,6 +66,7 @@ p{ margin:0; }
 }
 .section-title.light{ color: #fff; }
 .section-title-center{ text-align: center; }
+.section-sub-center{ text-align: center; margin-left: auto; margin-right: auto; }
 .trust-tagline{
   text-align: center;
   font-weight: 700;

@@ -170,7 +170,10 @@ const PRODUCTS = [
     originalPrice: 399,
     availability: "disponible",
     icon: "other",
-    photos: [],
+    photos: [
+      "assets/products/teclado-apple-1.webp",
+      "assets/products/teclado-apple-2.webp",
+    ],
     badge: "",
   },
 ];

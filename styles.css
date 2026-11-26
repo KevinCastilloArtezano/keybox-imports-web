@@ -213,7 +213,7 @@ p{ margin:0; }
   display:flex;
   align-items:center;
   justify-content:center;
-  min-height: 380px;
+  min-height: 440px;
   perspective: 1400px;
 }
 .hero-glow{
@@ -235,13 +235,25 @@ p{ margin:0; }
   width: 58%;
   left: 0;
   top: 6%;
-  z-index: 1;
+  z-index: 2;
 }
 .hero-device-pro{
   width: 72%;
   right: 2%;
   bottom: 2%;
-  z-index: 2;
+  z-index: 3;
+}
+.hero-device-ipadpro{
+  width: 30%;
+  right: -4%;
+  top: -6%;
+  z-index: 1;
+}
+.hero-device-ipadmini{
+  width: 24%;
+  left: -6%;
+  bottom: 10%;
+  z-index: 1;
 }
 .hero-mac{ width: 100%; height: auto; display: block; }
 .hero-mac-air{
@@ -258,6 +270,22 @@ p{ margin:0; }
   animation: heroFloatPro 6s ease-in-out infinite;
   animation-delay: .35s;
 }
+.hero-mac-ipadpro{
+  filter:
+    drop-shadow(0 18px 22px rgba(10,14,22,0.5))
+    drop-shadow(0 8px 24px rgba(108,99,255,0.25))
+    brightness(0.78) saturate(0.85);
+  animation: heroFloatIpadPro 8s ease-in-out infinite;
+  animation-delay: .15s;
+}
+.hero-mac-ipadmini{
+  filter:
+    drop-shadow(0 16px 20px rgba(10,14,22,0.5))
+    drop-shadow(0 8px 22px rgba(46,196,182,0.25))
+    brightness(0.78) saturate(0.85);
+  animation: heroFloatIpadMini 6.5s ease-in-out infinite;
+  animation-delay: .6s;
+}
 @keyframes heroFloatAir{
   0%, 100%{ transform: translateY(0) rotate(-1.4deg); }
   50%{ transform: translateY(-13px) rotate(-0.4deg); }
@@ -266,8 +294,16 @@ p{ margin:0; }
   0%, 100%{ transform: translateY(0) rotate(0.8deg); }
   50%{ transform: translateY(-17px) rotate(1.6deg); }
 }
+@keyframes heroFloatIpadPro{
+  0%, 100%{ transform: translateY(0) rotate(2deg); }
+  50%{ transform: translateY(-10px) rotate(3deg); }
+}
+@keyframes heroFloatIpadMini{
+  0%, 100%{ transform: translateY(0) rotate(-2.2deg); }
+  50%{ transform: translateY(-9px) rotate(-1.2deg); }
+}
 @media (prefers-reduced-motion: reduce){
-  .hero-mac-air, .hero-mac-pro{ animation: none; }
+  .hero-mac-air, .hero-mac-pro, .hero-mac-ipadpro, .hero-mac-ipadmini{ animation: none; }
 }
 
 /* ---------- categories ---------- */

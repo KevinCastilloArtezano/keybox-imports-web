@@ -95,9 +95,13 @@ function setupWhatsappLinks() {
 
 function setupHeroParallax() {
   const visual = document.getElementById("heroVisual");
-  const air = document.getElementById("heroDeviceAir");
-  const pro = document.getElementById("heroDevicePro");
-  if (!visual || !air || !pro) return;
+  const devices = [
+    { el: document.getElementById("heroDeviceAir"), mx: -14, my: -10 },
+    { el: document.getElementById("heroDevicePro"), mx: 18, my: 12 },
+    { el: document.getElementById("heroDeviceIpadPro"), mx: 24, my: -16 },
+    { el: document.getElementById("heroDeviceIpadMini"), mx: -22, my: 14 },
+  ].filter((d) => d.el);
+  if (!visual || !devices.length) return;
   const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (reduced || !canHover) return;
@@ -106,12 +110,14 @@ function setupHeroParallax() {
     const r = visual.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;
-    air.style.transform = `translate(${px * -14}px, ${py * -10}px)`;
-    pro.style.transform = `translate(${px * 18}px, ${py * 12}px)`;
+    devices.forEach((d) => {
+      d.el.style.transform = `translate(${px * d.mx}px, ${py * d.my}px)`;
+    });
   });
   visual.addEventListener("pointerleave", () => {
-    air.style.transform = "";
-    pro.style.transform = "";
+    devices.forEach((d) => {
+      d.el.style.transform = "";
+    });
   });
 }
 

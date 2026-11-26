@@ -125,12 +125,13 @@ const MODAL_FALLBACK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="curren
 
 function macbooksModalItem(product) {
   const price = formatPrice(product.price);
-  const photo = product.photo
-    ? `<img src="${product.photo}" alt="${product.name}" loading="lazy">`
+  const hasPhotos = Array.isArray(product.photos) && product.photos.length > 0;
+  const photo = hasPhotos
+    ? `<img src="${product.photos[0]}" alt="${product.name}" loading="lazy">`
     : MODAL_FALLBACK_ICON;
   return `
     <article class="modal-item">
-      <div class="modal-item-photo">${photo}</div>
+      <div class="modal-item-photo${hasPhotos ? " has-photo" : ""}" ${hasPhotos ? `data-product-id="${product.id}"` : ""}>${photo}</div>
       <div class="modal-item-info">
         <h4>${product.name}</h4>
         <p class="modal-item-specs">${product.specs}</p>
@@ -190,8 +191,74 @@ function setupMacbooksModal() {
   modal.addEventListener("click", (e) => {
     if (e.target === modal) close();
   });
+  document.getElementById("macbooksModalBody").addEventListener("click", (e) => {
+    const photoEl = e.target.closest(".modal-item-photo[data-product-id]");
+    if (!photoEl) return;
+    const product = PRODUCTS.find((p) => p.id === photoEl.dataset.productId);
+    if (product && Array.isArray(product.photos) && product.photos.length) {
+      openPhotoLightbox(product.photos, 0);
+    }
+  });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.hidden) close();
+  });
+}
+
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function renderLightbox() {
+  const img = document.getElementById("lightboxImage");
+  const counter = document.getElementById("lightboxCounter");
+  const thumbs = document.getElementById("lightboxThumbs");
+  img.src = lightboxPhotos[lightboxIndex];
+  counter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+  thumbs.innerHTML = lightboxPhotos
+    .map(
+      (src, i) =>
+        `<button class="lightbox-thumb${i === lightboxIndex ? " is-active" : ""}" data-index="${i}" aria-label="Ver foto ${i + 1}"><img src="${src}" alt=""></button>`
+    )
+    .join("");
+}
+
+function openPhotoLightbox(photos, startIndex) {
+  lightboxPhotos = photos;
+  lightboxIndex = startIndex || 0;
+  renderLightbox();
+  const lightbox = document.getElementById("photoLightbox");
+  lightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function closePhotoLightbox() {
+  document.getElementById("photoLightbox").hidden = true;
+  document.body.style.overflow = "";
+}
+
+function setupPhotoLightbox() {
+  const lightbox = document.getElementById("photoLightbox");
+  if (!lightbox) return;
+  const step = (delta) => {
+    lightboxIndex = (lightboxIndex + delta + lightboxPhotos.length) % lightboxPhotos.length;
+    renderLightbox();
+  };
+  document.getElementById("lightboxClose").addEventListener("click", closePhotoLightbox);
+  document.getElementById("lightboxPrev").addEventListener("click", () => step(-1));
+  document.getElementById("lightboxNext").addEventListener("click", () => step(1));
+  document.getElementById("lightboxThumbs").addEventListener("click", (e) => {
+    const thumb = e.target.closest(".lightbox-thumb");
+    if (!thumb) return;
+    lightboxIndex = Number(thumb.dataset.index);
+    renderLightbox();
+  });
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closePhotoLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") closePhotoLightbox();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
   });
 }
 
@@ -202,5 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupWhatsappLinks();
   setupHeroParallax();
   setupMacbooksModal();
+  setupPhotoLightbox();
   document.getElementById("year").textContent = new Date().getFullYear();
 });

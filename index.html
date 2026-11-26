@@ -309,6 +309,18 @@
   </div>
 </div>
 
+<!-- ============ LIGHTBOX: GALERÍA DE FOTOS ============ -->
+<div class="lightbox-backdrop" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Galería de fotos" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar galería">✕</button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+  <div class="lightbox-stage">
+    <img id="lightboxImage" src="" alt="">
+    <p class="lightbox-counter" id="lightboxCounter"></p>
+  </div>
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Foto siguiente">›</button>
+  <div class="lightbox-thumbs" id="lightboxThumbs"></div>
+</div>
+
 <script src="products.js"></script>
 <script src="carousel.js"></script>
 <script src="script.js"></script>

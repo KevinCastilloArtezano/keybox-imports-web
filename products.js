@@ -16,10 +16,12 @@
  *  icon          -> "macbook" | "case" | "charger" | "other" (ilustración de respaldo)
  *  badge         -> texto corto opcional (ej: "Más vendido"), o "" si no aplica
  *                   (si hay originalPrice, se muestra "Oferta" automáticamente)
- *  photo         -> ruta a una FOTO REAL del equipo (ej: "assets/products/macbook-pro-2020-13.jpg"),
- *                   o null si todavía no hay foto (se muestra un ícono de respaldo).
- *                   Para agregar una foto: coloca el archivo de imagen dentro de la
- *                   carpeta assets/products/ y escribe aquí su ruta exacta.
+ *  photos        -> lista de rutas a FOTOS REALES del equipo, en el orden en que se
+ *                   deben mostrar (ej: ["assets/products/macbook-pro-2020-13-1.jpg", ...]).
+ *                   Lista vacía [] si todavía no hay fotos (se muestra un ícono de respaldo).
+ *                   Para agregar fotos: coloca los archivos dentro de assets/products/
+ *                   y lista aquí sus rutas en el orden deseado. Con 2 o más fotos se
+ *                   muestra una galería (miniaturas + flechas) al abrir el detalle.
  *
  * Los textos marcados [EDITAR] son de ejemplo y deben ser reemplazados
  * por KEYBOX IMPORTS con información real antes de publicar.
@@ -36,7 +38,7 @@ const PRODUCTS = [
     originalPrice: 2999,
     availability: "disponible",
     icon: "macbook",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -49,7 +51,15 @@ const PRODUCTS = [
     originalPrice: 2899,
     availability: "disponible",
     icon: "macbook",
-    photo: null,
+    photos: [
+      "assets/products/macbook-pro-2019-16-1.webp",
+      "assets/products/macbook-pro-2019-16-2.webp",
+      "assets/products/macbook-pro-2019-16-3.webp",
+      "assets/products/macbook-pro-2019-16-4.webp",
+      "assets/products/macbook-pro-2019-16-5.webp",
+      "assets/products/macbook-pro-2019-16-6.webp",
+      "assets/products/macbook-pro-2019-16-7.webp",
+    ],
     badge: "",
   },
   {
@@ -62,7 +72,7 @@ const PRODUCTS = [
     originalPrice: 999,
     availability: "disponible",
     icon: "macbook",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -75,7 +85,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "case",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -88,7 +98,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "case",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -101,7 +111,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -114,7 +124,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
-    photo: null,
+    photos: [],
     badge: "",
   },
   {
@@ -127,7 +137,7 @@ const PRODUCTS = [
     originalPrice: 399,
     availability: "disponible",
     icon: "other",
-    photo: null,
+    photos: [],
     badge: "",
   },
 ];

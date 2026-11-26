@@ -144,16 +144,20 @@ const PRODUCTS = [
     badge: "",
   },
   {
-    id: "cargador-usb-c-86w",
+    id: "cargador-usb-c-87w",
     category: "cargadores",
-    name: "Cargador USB-C 86W",
+    name: "Cargador USB-C 87W",
     condition: "Usado",
     specs: "Compatible con MacBook Pro",
     price: 189,
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
-    photos: [],
+    photos: [
+      "assets/products/cargador-usb-c-87w-1.webp",
+      "assets/products/cargador-usb-c-87w-2.webp",
+      "assets/products/cargador-usb-c-87w-3.webp",
+    ],
     badge: "",
   },
   {

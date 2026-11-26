@@ -740,6 +740,7 @@ p{ margin:0; }
   padding: 20px;
   background: rgba(217, 154, 70, 0.08);
 }
+.trust-item-envios{ grid-column: 2; }
 .trust-item h4{ font-size: 0.95rem; margin-bottom: 6px; }
 .trust-item p{ font-size: 0.86rem; color: var(--ink-soft); }
 .trust-item p + p{ margin-top: 8px; }

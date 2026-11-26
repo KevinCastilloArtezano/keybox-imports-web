@@ -766,13 +766,13 @@ p{ margin:0; }
 .site-footer{ background: #0c111c; color: #c7ccd3; padding: 56px 0 20px; }
 .footer-inner{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   gap: 32px;
   padding-bottom: 32px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .footer-col{ display:flex; flex-direction:column; gap: 10px; font-size: 0.9rem; }
-.footer-col-contact{ align-items: flex-end; text-align: right; }
+.footer-col-contact{ align-items: center; text-align: center; }
 .footer-col h4{ color:#fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .footer-col a:hover{ color:#fff; }
 .footer-logo{ color:#fff; margin-bottom: 8px; }

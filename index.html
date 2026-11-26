@@ -21,7 +21,7 @@
 
     <nav class="nav-desktop" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
-      <a href="#macbooks">MacBooks</a>
+      <a href="#macbooks" class="js-open-macbooks">MacBooks</a>
       <a href="#accesorios">Accesorios</a>
       <a href="#otros">Otros productos</a>
       <a href="#contacto">Contacto</a>
@@ -40,7 +40,7 @@
 
   <nav class="nav-mobile" id="nav-mobile" aria-label="Navegación móvil">
     <a href="#inicio">Inicio</a>
-    <a href="#macbooks">MacBooks</a>
+    <a href="#macbooks" class="js-open-macbooks">MacBooks</a>
     <a href="#accesorios">Accesorios</a>
     <a href="#otros">Otros productos</a>
     <a href="#contacto">Contacto</a>
@@ -297,6 +297,17 @@
     <p>&copy; <span id="year"></span> KEYBOX IMPORTS. Todos los derechos reservados.</p>
   </div>
 </footer>
+
+<!-- ============ MODAL: EQUIPOS DISPONIBLES (MACBOOKS) ============ -->
+<div class="modal-backdrop" id="macbooksModal" role="dialog" aria-modal="true" aria-labelledby="macbooksModalTitle" hidden>
+  <div class="modal-panel">
+    <div class="modal-header">
+      <h3 id="macbooksModalTitle">Equipos disponibles — MacBooks</h3>
+      <button class="modal-close" id="macbooksModalClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body" id="macbooksModalBody"></div>
+  </div>
+</div>
 
 <script src="products.js"></script>
 <script src="carousel.js"></script>

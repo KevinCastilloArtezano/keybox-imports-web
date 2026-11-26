@@ -13,9 +13,13 @@
  *  price         -> precio actual en soles (número) o null si aún no hay precio
  *  originalPrice -> precio anterior en soles (número) si está en oferta, o null
  *  availability  -> "disponible" | "pocas" | "consultar"
- *  icon          -> "macbook" | "case" | "charger" | "other" (ilustración)
+ *  icon          -> "macbook" | "case" | "charger" | "other" (ilustración de respaldo)
  *  badge         -> texto corto opcional (ej: "Más vendido"), o "" si no aplica
  *                   (si hay originalPrice, se muestra "Oferta" automáticamente)
+ *  photo         -> ruta a una FOTO REAL del equipo (ej: "assets/products/macbook-pro-2020-13.jpg"),
+ *                   o null si todavía no hay foto (se muestra un ícono de respaldo).
+ *                   Para agregar una foto: coloca el archivo de imagen dentro de la
+ *                   carpeta assets/products/ y escribe aquí su ruta exacta.
  *
  * Los textos marcados [EDITAR] son de ejemplo y deben ser reemplazados
  * por KEYBOX IMPORTS con información real antes de publicar.
@@ -32,6 +36,7 @@ const PRODUCTS = [
     originalPrice: 2999,
     availability: "disponible",
     icon: "macbook",
+    photo: null,
     badge: "",
   },
   {
@@ -44,6 +49,7 @@ const PRODUCTS = [
     originalPrice: 2899,
     availability: "disponible",
     icon: "macbook",
+    photo: null,
     badge: "",
   },
   {
@@ -56,6 +62,7 @@ const PRODUCTS = [
     originalPrice: 999,
     availability: "disponible",
     icon: "macbook",
+    photo: null,
     badge: "",
   },
   {
@@ -68,6 +75,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "case",
+    photo: null,
     badge: "",
   },
   {
@@ -80,6 +88,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "case",
+    photo: null,
     badge: "",
   },
   {
@@ -92,6 +101,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
+    photo: null,
     badge: "",
   },
   {
@@ -104,6 +114,7 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
+    photo: null,
     badge: "",
   },
   {
@@ -116,6 +127,7 @@ const PRODUCTS = [
     originalPrice: 399,
     availability: "disponible",
     icon: "other",
+    photo: null,
     badge: "",
   },
 ];

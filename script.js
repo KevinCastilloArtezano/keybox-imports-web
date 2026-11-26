@@ -121,11 +121,86 @@ function setupHeroParallax() {
   });
 }
 
+const MODAL_FALLBACK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v10H4z"/><path d="M2 18h20l-2 2H4z" fill="currentColor" stroke="none"/></svg>`;
+
+function macbooksModalItem(product) {
+  const price = formatPrice(product.price);
+  const photo = product.photo
+    ? `<img src="${product.photo}" alt="${product.name}" loading="lazy">`
+    : MODAL_FALLBACK_ICON;
+  return `
+    <article class="modal-item">
+      <div class="modal-item-photo">${photo}</div>
+      <div class="modal-item-info">
+        <h4>${product.name}</h4>
+        <p class="modal-item-specs">${product.specs}</p>
+        <div class="modal-item-meta">
+          <span class="modal-badge ${product.condition === "Nuevo" ? "is-new" : "is-used"}">${product.condition}</span>
+          ${price
+            ? `<span class="modal-item-price">${price}</span>`
+            : `<span class="modal-item-price muted">Consultar precio</span>`}
+          <span class="modal-availability is-${product.availability}">${AVAILABILITY_LABELS[product.availability]}</span>
+        </div>
+      </div>
+      <div class="modal-item-action">
+        <a class="btn btn-whatsapp" href="${waLink(waMessageFor(product))}" target="_blank" rel="noopener">Consultar</a>
+      </div>
+    </article>
+  `;
+}
+
+function renderMacbooksModal() {
+  const body = document.getElementById("macbooksModalBody");
+  const items = PRODUCTS.filter((p) => p.category === "macbooks");
+  body.innerHTML = items.length
+    ? items.map(macbooksModalItem).join("")
+    : `<p class="modal-empty">Aún no hay equipos cargados en esta categoría.</p>`;
+}
+
+function setupMacbooksModal() {
+  const modal = document.getElementById("macbooksModal");
+  const closeBtn = document.getElementById("macbooksModalClose");
+  if (!modal || !closeBtn) return;
+
+  const open = () => {
+    renderMacbooksModal();
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  };
+  const close = () => {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  document.querySelectorAll(".js-open-macbooks").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const nav = document.getElementById("nav-mobile");
+      const toggle = document.getElementById("menu-toggle");
+      if (nav && nav.classList.contains("is-open")) {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+      open();
+    });
+  });
+
+  closeBtn.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) close();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
   setupFilters();
   setupMobileMenu();
   setupWhatsappLinks();
   setupHeroParallax();
+  setupMacbooksModal();
   document.getElementById("year").textContent = new Date().getFullYear();
 });

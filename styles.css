@@ -686,6 +686,7 @@ p{ margin:0; }
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 32px;
 }
 .filter-btn{

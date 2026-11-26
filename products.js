@@ -38,7 +38,14 @@ const PRODUCTS = [
     originalPrice: 2999,
     availability: "disponible",
     icon: "macbook",
-    photos: [],
+    photos: [
+      "assets/products/macbook-pro-2020-13-1.webp",
+      "assets/products/macbook-pro-2020-13-2.webp",
+      "assets/products/macbook-pro-2020-13-3.webp",
+      "assets/products/macbook-pro-2020-13-4.webp",
+      "assets/products/macbook-pro-2020-13-5.webp",
+      "assets/products/macbook-pro-2020-13-6.webp",
+    ],
     badge: "",
   },
   {

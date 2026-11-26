@@ -100,6 +100,9 @@ function setupHeroParallax() {
     { el: document.getElementById("heroDevicePro"), mx: 18, my: 12 },
     { el: document.getElementById("heroDeviceIpadPro"), mx: 24, my: -16 },
     { el: document.getElementById("heroDeviceIpadMini"), mx: -22, my: 14 },
+    { el: document.getElementById("heroDeviceAirpodsMax"), mx: 14, my: -18 },
+    { el: document.getElementById("heroDevicePhone"), mx: -16, my: 10 },
+    { el: document.getElementById("heroDeviceAirpodsPro"), mx: 20, my: 16 },
   ].filter((d) => d.el);
   if (!visual || !devices.length) return;
   const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

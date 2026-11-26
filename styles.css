@@ -199,9 +199,9 @@ p{ margin:0; }
 .eyebrow{
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.78rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-2);
   margin-bottom: 14px;
 }
 .hero h1{

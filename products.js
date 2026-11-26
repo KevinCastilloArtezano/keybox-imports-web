@@ -114,7 +114,12 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "case",
-    photos: [],
+    photos: [
+      "assets/products/funda-macbook-pro-15-1.webp",
+      "assets/products/funda-macbook-pro-15-2.webp",
+      "assets/products/funda-macbook-pro-15-3.webp",
+      "assets/products/funda-macbook-pro-15-4.webp",
+    ],
     badge: "",
   },
   {

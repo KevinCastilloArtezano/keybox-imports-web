@@ -101,6 +101,8 @@ const PRODUCTS = [
     photos: [
       "assets/products/funda-macbook-pro-13-1.webp",
       "assets/products/funda-macbook-pro-13-2.webp",
+      "assets/products/funda-macbook-pro-13-3.webp",
+      "assets/products/funda-macbook-pro-13-4.webp",
     ],
     badge: "",
   },

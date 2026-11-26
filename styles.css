@@ -745,6 +745,8 @@ p{ margin:0; }
 .trust-item p + p{ margin-top: 8px; }
 
 /* ---------- about ---------- */
+.about-inner{ text-align: center; }
+.about-inner > div{ display: flex; flex-direction: column; align-items: center; }
 .about-inner p{ color: var(--ink-soft); margin-bottom: 14px; max-width: 720px; }
 .about-inner p:last-child{ margin-bottom:0; }
 

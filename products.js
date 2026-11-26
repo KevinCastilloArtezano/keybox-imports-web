@@ -79,7 +79,13 @@ const PRODUCTS = [
     originalPrice: 999,
     availability: "disponible",
     icon: "macbook",
-    photos: [],
+    photos: [
+      "assets/products/macbook-air-2017-1.webp",
+      "assets/products/macbook-air-2017-2.webp",
+      "assets/products/macbook-air-2017-3.webp",
+      "assets/products/macbook-air-2017-4.webp",
+      "assets/products/macbook-air-2017-5.webp",
+    ],
     badge: "",
   },
   {

@@ -134,7 +134,13 @@ const PRODUCTS = [
     originalPrice: null,
     availability: "disponible",
     icon: "charger",
-    photos: [],
+    photos: [
+      "assets/products/cargador-usb-c-61w-1.webp",
+      "assets/products/cargador-usb-c-61w-2.webp",
+      "assets/products/cargador-usb-c-61w-3.webp",
+      "assets/products/cargador-usb-c-61w-4.webp",
+      "assets/products/cargador-usb-c-61w-5.webp",
+    ],
     badge: "",
   },
   {

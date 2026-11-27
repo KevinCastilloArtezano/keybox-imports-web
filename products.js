@@ -25,6 +25,31 @@
  *
  * Los textos marcados [EDITAR] son de ejemplo y deben ser reemplazados
  * por KEYBOX IMPORTS con información real antes de publicar.
+ *
+ * ---------------------------------------------------------
+ * PLANTILLA EN BLANCO — para agregar un producto nuevo:
+ * 1) Copia desde la llave { de abajo hasta la llave } (incluida la coma final).
+ * 2) Pégala dentro de la lista PRODUCTS, antes del ]; que la cierra.
+ * 3) Rellena cada campo reemplazando el texto en MAYÚSCULAS.
+ * 4) Si no tienes fotos todavía, deja photos: [] (vacío).
+ *
+ *   {
+ *     id: "ID-UNICO-SIN-ESPACIOS",
+ *     category: "macbooks", // o "fundas" | "cargadores" | "otros"
+ *     name: "NOMBRE DEL PRODUCTO",
+ *     condition: "Usado", // o "Nuevo"
+ *     specs: "ESPECIFICACIONES PRINCIPALES",
+ *     price: 0, // número en soles, o null si aún no hay precio
+ *     originalPrice: null, // número si está en oferta, o null
+ *     availability: "disponible", // o "pocas" | "consultar"
+ *     icon: "macbook", // o "case" | "charger" | "other"
+ *     photos: [
+ *       "assets/products/NOMBRE-DE-LA-FOTO-1.webp",
+ *       "assets/products/NOMBRE-DE-LA-FOTO-2.webp",
+ *     ],
+ *     badge: "",
+ *   },
+ * ---------------------------------------------------------
  */
 
 const PRODUCTS = [

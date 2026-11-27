@@ -47,6 +47,11 @@ function renderProducts(filter = "all") {
       interval: 3.4,
       step: 2,
       onFront: updateCarouselInfo,
+      onFrontClick: (product) => {
+        if (Array.isArray(product.photos) && product.photos.length) {
+          openPhotoLightbox(product.photos, 0);
+        }
+      },
     });
     document.getElementById("carousel-prev").addEventListener("click", () => carousel.goTo(-1));
     document.getElementById("carousel-next").addEventListener("click", () => carousel.goTo(1));

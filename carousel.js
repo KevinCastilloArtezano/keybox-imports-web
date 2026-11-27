@@ -273,6 +273,18 @@
     return t + "…";
   }
 
+  const IMAGE_CACHE = new Map();
+  function getProductImage(src, onLoad) {
+    let img = IMAGE_CACHE.get(src);
+    if (!img) {
+      img = new Image();
+      img.src = src;
+      IMAGE_CACHE.set(src, img);
+    }
+    if (!img.complete && onLoad) img.addEventListener("load", onLoad, { once: true });
+    return img;
+  }
+
   function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
@@ -283,22 +295,25 @@
     ctx.closePath();
   }
 
-  function paintCard(cv, product) {
+  function paintCard(cv, product, notifyReady) {
     const w = cv.width;
     const h = cv.height;
     const ctx = cv.getContext("2d");
     if (!ctx) return;
     const k = w / CW;
     const pal = PALETTES[product.category] || PALETTES.otros;
+    const photoSrc = Array.isArray(product.photos) && product.photos.length ? product.photos[0] : null;
+    const img = photoSrc ? getProductImage(photoSrc, notifyReady) : null;
+    const hasImg = !!(img && img.complete && img.naturalWidth);
+
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, w, h);
     paintMesh(ctx, w, h, pal.mesh);
     ctx.setTransform(k, 0, 0, k, 0, 0);
     ctx.textBaseline = "alphabetic";
     const white = [255, 255, 255];
-    const accent = parseColor(pal.accent);
 
-    // condition badge
+    // condition badge (top-left)
     const condColor = CONDITION_COLOR[product.condition] || CONDITION_COLOR.Usado;
     ctx.font = fontStr(700, 8);
     const condW = ctx.measureText(product.condition).width + 16;
@@ -308,83 +323,75 @@
     ctx.fillStyle = rgba(white, 0.95);
     ctx.fillText(product.condition, 22, 26.5);
 
-    // title (two lines)
-    const small = 15.5;
-    ctx.font = fontStr(600, small);
+    // availability pill (top-right)
+    const availCol = AVAIL_COLOR[product.availability] || AVAIL_COLOR.consultar;
+    const label = { disponible: "Disponible", pocas: "Pocas unidades", consultar: "Consultar" }[product.availability] || "Consultar";
+    ctx.font = fontStr(700, 8);
+    const pillW = ctx.measureText(label).width + 16;
+    ctx.fillStyle = rgba(availCol, 0.95);
+    roundRect(ctx, CW - 14 - pillW, 14, pillW, 18, 9);
+    ctx.fill();
     ctx.fillStyle = rgba(white, 0.95);
-    const [l1, l2] = wrapTwoLines(ctx, product.name, 222);
-    ctx.fillText(l1, 17, 58);
-    if (l2) ctx.fillText(l2, 17, 58 + 18);
+    ctx.fillText(label, CW - 14 - pillW + 8, 26.5);
 
-    // price / numeral
-    const big = 46;
-    ctx.font = fontStr(300, big);
-    const hasPrice = typeof product.price === "number";
-    const valueStr = hasPrice ? `S/ ${product.price.toLocaleString("es-PE")}` : "Consultar";
-    const vw = ctx.measureText(valueStr).width;
-    const x0 = Math.max(17, 128 - vw / 2);
+    // photo window: fixed size/position for every card, photo never cropped,
+    // always centered inside it (fixes products looking "too high/low").
+    const PX = 16, PY = 42, PW = CW - PX * 2, PH = 148;
+    ctx.save();
+    roundRect(ctx, PX, PY, PW, PH, 14);
+    ctx.clip();
+    ctx.fillStyle = "rgba(255,255,255,0.05)";
+    ctx.fillRect(PX, PY, PW, PH);
+    if (hasImg) {
+      const pad = 10;
+      const bx = PX + pad, by = PY + pad, bw = PW - pad * 2, bh = PH - pad * 2;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+      const scale = Math.min(bw / iw, bh / ih);
+      const dw = iw * scale, dh = ih * scale;
+      ctx.drawImage(img, bx + (bw - dw) / 2, by + (bh - dh) / 2, dw, dh);
+    }
+    ctx.restore();
+    ctx.strokeStyle = rgba(white, 0.1);
+    ctx.lineWidth = 1;
+    roundRect(ctx, PX, PY, PW, PH, 14);
+    ctx.stroke();
+
+    // title (one line, ellipsized) below the photo window
+    const titleY = PY + PH + 26;
+    ctx.font = fontStr(600, 15);
+    ctx.fillStyle = rgba(white, 0.95);
+    ctx.fillText(ellipsize(ctx, product.name, CW - 34), 17, titleY);
+
+    // price
     const n0 = parseColor(pal.numeral[0]);
     const n1 = parseColor(pal.numeral[1]);
+    const hasPrice = typeof product.price === "number";
+    const valueStr = hasPrice ? `S/ ${product.price.toLocaleString("es-PE")}` : "Consultar";
+    const priceY = titleY + 30;
     if (hasPrice) {
-      if (typeof product.originalPrice === "number") {
-        ctx.font = fontStr(400, 13);
-        const origStr = `S/ ${product.originalPrice.toLocaleString("es-PE")}`;
-        ctx.fillStyle = rgba(white, 0.55);
-        ctx.fillText(origStr, x0, 160);
-        const ow = ctx.measureText(origStr).width;
-        ctx.strokeStyle = rgba(white, 0.55);
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(x0, 156);
-        ctx.lineTo(x0 + ow, 156);
-        ctx.stroke();
-      }
-      const grad = ctx.createLinearGradient(x0, 0, x0 + vw, 0);
+      ctx.font = fontStr(300, 28);
+      const vw = ctx.measureText(valueStr).width;
+      const grad = ctx.createLinearGradient(17, 0, 17 + vw, 0);
       grad.addColorStop(0, rgba(n0, 1));
       grad.addColorStop(1, rgba(n1, 1));
-      ctx.save();
-      ctx.shadowColor = rgba(n1, 0.35);
-      ctx.shadowBlur = 10 * k;
-      ctx.font = fontStr(300, big);
       ctx.fillStyle = grad;
-      ctx.fillText(valueStr, x0, 186);
-      ctx.restore();
+      ctx.fillText(valueStr, 17, priceY);
+      if (typeof product.originalPrice === "number") {
+        ctx.font = fontStr(400, 12);
+        const origStr = `S/ ${product.originalPrice.toLocaleString("es-PE")}`;
+        ctx.fillStyle = rgba(white, 0.5);
+        ctx.fillText(origStr, 17 + vw + 10, priceY);
+      }
     } else {
-      ctx.font = fontStr(500, 20);
+      ctx.font = fontStr(500, 16);
       ctx.fillStyle = rgba(white, 0.75);
-      ctx.fillText(valueStr, x0, 182);
-    }
-
-    // decorative ring ticks under the price (purely visual, category-tinted)
-    const cx0 = 128, cy0 = 230;
-    for (let i = 0; i < 90; i++) {
-      const a = (i / 90) * Math.PI * 2 - Math.PI / 2;
-      const top = 0.5 + 0.5 * Math.cos(a + Math.PI / 2);
-      const len = 3 + 3 * top;
-      ctx.strokeStyle = rgba(accent, 0.18 + 0.4 * top * top);
-      ctx.lineWidth = 0.8 + 0.6 * top;
-      const r1 = 46;
-      ctx.beginPath();
-      ctx.moveTo(cx0 + Math.cos(a) * r1, cy0 + Math.sin(a) * r1);
-      ctx.lineTo(cx0 + Math.cos(a) * (r1 + len), cy0 + Math.sin(a) * (r1 + len));
-      ctx.stroke();
+      ctx.fillText(valueStr, 17, priceY);
     }
 
     // specs (footer, one line)
     ctx.font = fontStr(400, 11);
-    ctx.fillStyle = rgba(white, 0.78);
-    ctx.fillText(ellipsize(ctx, product.specs, 222), 17, 270);
-
-    // availability pill (bottom-right)
-    const availCol = AVAIL_COLOR[product.availability] || AVAIL_COLOR.consultar;
-    const label = { disponible: "Disponible", pocas: "Pocas unidades", consultar: "Consultar" }[product.availability] || "Consultar";
-    ctx.font = fontStr(700, 9);
-    const pillW = ctx.measureText(label).width + 18;
-    ctx.fillStyle = rgba(availCol, 0.95);
-    roundRect(ctx, CW - 17 - pillW, CH - 32, pillW, 18, 9);
-    ctx.fill();
-    ctx.fillStyle = rgba(white, 0.95);
-    ctx.fillText(label, CW - 17 - pillW + 9, CH - 19.5);
+    ctx.fillStyle = rgba(white, 0.7);
+    ctx.fillText(ellipsize(ctx, product.specs, CW - 34), 17, CH - 20);
   }
 
   /** Cara trasera: simétrica (sin texto), para cuando la tarjeta gira de canto y el
@@ -668,7 +675,10 @@
         const cv = document.createElement("canvas");
         cv.width = w;
         cv.height = Math.round((w * CH) / CW);
-        paintCard(cv, card);
+        paintCard(cv, card, () => {
+          paintCard(cv, card);
+          this._draw(performance.now() / 1000);
+        });
         return cv;
       });
       this.cardBackCanvases = this.list.map((card) => {
@@ -798,8 +808,18 @@
           L.mode = "rest";
           const r = this.container.getBoundingClientRect();
           const u = (e.clientX - r.left - r.width / 2) / Math.min(r.width / 720, r.height / 440 || 1);
-          if (u > 90) this.goTo(1);
-          else if (u < -90) this.goTo(-1);
+          if (u > 90) {
+            this.goTo(1);
+            return;
+          }
+          if (u < -90) {
+            this.goTo(-1);
+            return;
+          }
+          if (this.realCount && this.opts.onFrontClick) {
+            const idx = mod(Math.round(this.L.P), this.realCount);
+            this.opts.onFrontClick(this.cards[idx]);
+          }
           return;
         }
         if (now - L.lastT > 0.08) L.v = 0;

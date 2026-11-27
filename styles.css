@@ -282,6 +282,12 @@ p{ margin:0; }
   bottom: 26%;
   z-index: 4;
 }
+.hero-device-keyboard{
+  width: 34%;
+  left: 6%;
+  bottom: -14%;
+  z-index: 2;
+}
 .hero-mac{ width: 100%; height: auto; display: block; }
 .hero-mac-air{
   filter:
@@ -362,9 +368,21 @@ p{ margin:0; }
   0%, 100%{ transform: translateY(0) rotate(-5deg); }
   50%{ transform: translateY(-7px) rotate(-3.5deg); }
 }
+.hero-mac-keyboard{
+  filter:
+    drop-shadow(0 16px 20px rgba(10,14,22,0.5))
+    drop-shadow(0 8px 22px rgba(46,196,182,0.25))
+    brightness(0.82) saturate(0.85);
+  animation: heroFloatKeyboard 6.8s ease-in-out infinite;
+  animation-delay: .45s;
+}
+@keyframes heroFloatKeyboard{
+  0%, 100%{ transform: translateY(0) rotate(-1.6deg); }
+  50%{ transform: translateY(-9px) rotate(-0.6deg); }
+}
 @media (prefers-reduced-motion: reduce){
   .hero-mac-air, .hero-mac-pro, .hero-mac-ipadpro, .hero-mac-ipadmini,
-  .hero-mac-airpodsmax, .hero-mac-phone, .hero-mac-airpodspro{ animation: none; }
+  .hero-mac-airpodsmax, .hero-mac-phone, .hero-mac-airpodspro, .hero-mac-keyboard{ animation: none; }
 }
 
 /* ---------- categories ---------- */

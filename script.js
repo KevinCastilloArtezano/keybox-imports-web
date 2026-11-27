@@ -108,6 +108,7 @@ function setupHeroParallax() {
     { el: document.getElementById("heroDeviceAirpodsMax"), mx: 14, my: -18 },
     { el: document.getElementById("heroDevicePhone"), mx: -16, my: 10 },
     { el: document.getElementById("heroDeviceAirpodsPro"), mx: 20, my: 16 },
+    { el: document.getElementById("heroDeviceKeyboard"), mx: -18, my: 12 },
   ].filter((d) => d.el);
   if (!visual || !devices.length) return;
   const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

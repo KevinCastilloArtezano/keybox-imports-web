@@ -818,6 +818,7 @@ p{ margin:0; }
   .trust-details{ grid-template-columns: 1fr; }
   .trust-item-envios{ grid-column: auto; }
   .footer-inner{ grid-template-columns: 1fr; }
+  .footer-col-contact{ align-items: flex-start; text-align: left; }
   .hero{ padding-top: 40px; }
   .hero-visual{ min-height: 300px; margin-bottom: -10px; }
   .product-carousel{ min-height: 300px; }

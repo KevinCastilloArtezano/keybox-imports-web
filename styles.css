@@ -816,6 +816,7 @@ p{ margin:0; }
   .section{ padding: 56px 0; }
   .categories-grid{ grid-template-columns: 1fr; }
   .trust-details{ grid-template-columns: 1fr; }
+  .trust-item-envios{ grid-column: auto; }
   .footer-inner{ grid-template-columns: 1fr; }
   .hero{ padding-top: 40px; }
   .hero-visual{ min-height: 300px; margin-bottom: -10px; }

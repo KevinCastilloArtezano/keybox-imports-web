@@ -794,7 +794,7 @@ p{ margin:0; }
 }
 .footer-col{ display:flex; flex-direction:column; gap: 10px; font-size: 0.9rem; }
 .footer-col-contact{ align-items: center; text-align: center; }
-.footer-social-link{ display: inline-flex; align-items: center; gap: 8px; }
+.footer-social-link{ display: inline-flex; align-items: center; justify-content: flex-start; gap: 8px; width: 112px; }
 .footer-social-link .footer-social-icon{ width: 1em; height: 1em; flex-shrink: 0; color: currentColor; }
 .footer-social-link .icon-wa,
 .footer-social-link .icon-fb{ fill: currentColor; }
